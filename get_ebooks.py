@@ -1,15 +1,10 @@
 # python 2.6 
-
+from ftp_info import FTP_DOMAIN, USERNAME, PASSWORD
 import pdb
 from ftplib import FTP
 import socket
 import os
 import zipfile
-
-# constants
-FTP_DOMAIN = 'meta.eblib.com'
-USERNAME = 'usmai'
-PASSWORD = 'qdF1m6s1'
 
 # connect and log in
 print "\n ----\n ---- Connecting...\n ----"
