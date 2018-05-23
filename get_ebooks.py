@@ -1,4 +1,4 @@
-# python 2.6 
+# python 2.7 
 from ftp_info import FTP_DOMAIN, USERNAME, PASSWORD
 import pdb
 from ftplib import FTP
