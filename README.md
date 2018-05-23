@@ -8,6 +8,8 @@ This repository includes a non-working example in `ftp_info_example.py`
 
 
 
+The script downloads a zip file, and unzips it into two CSVs. One csv lists the ebooks to delete from SFX, and the other one lists the ebooks to add to SFX. 
+
 The data will be changed from CSV format like so:
 
 ```
@@ -16,11 +18,13 @@ The data will be changed from CSV format like so:
 
 ```
 
-The bibloader format looks like this:
+The final bibloader format in `usmai-active.txt` and `usmai-inactive.txt` looks like this:
 
 ```
 9781483156750	bkey=1822018	ACTIVE
 9781483153520	bkey=1828979	ACTIVE
 9781483163055	bkey=1834312	ACTIVE
 ```
+
+
 
