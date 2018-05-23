@@ -63,48 +63,28 @@ for i, file in enumerate(unzipped_files):
         return row[0]
     
     # check to see if the file is to Add or Delete and give it an ACTIVE or INACTIVE status  
-    def get_status(unzipped_file):
+    def get_status(unzipped_files):
         if unzipped_files[i].endswith("Add.csv"):
-            return status = "ACTIVE"
+            status = "ACTIVE"
+            return status
         elif unzipped_files[i].endswith("Delete.csv"):
-            return status = "INACTIVE"
-        else
-            print "There is no Add.csv or Delete.csv. Could not generate txt file."
-    
+            status = "INACTIVE"
+            return status
+
     # set the status INACTIVE or ACTIVE
-    get_status(unzipped_files)
+    status = get_status(unzipped_files)
     
-    
-    # write to dataloader based on get_status
-    def write_data(status):
-    if unzipped_files[i].endswith("Add.csv"):
+    # function to write to dataloader based on get_status
+    def write_data(status, csv_f):
         for row in csv_f:
             eisbn = get_eisbn(row)
             bkey = get_bkey(row)
-            add_dataloader.write(eisbn + "\tbkey=" + bkey +"\tACTIVE\n")
-    elif unzipped_files[i].endswith("Delete.csv"):
-        for row in csv_f:
-            eisbn = get_eisbn(row)
-            bkey = get_bkey(row)
-            delete_dataloader.write(eisbn + "\tbkey=" + bkey +"\tINACTIVE\n")
-
-            
-
-            
-            
-            
+            if status =="ACTIVE":
+                add_dataloader.write(eisbn + "\tbkey=" + bkey +"\tACTIVE\n")
+            else:
+                delete_dataloader.write(eisbn + "\tbkey=" + bkey +"\tINACTIVE\n")
     
-            
-        
-        
-        
-        
-        
-    
-    
-    
-    
-
-
-
-# diff the files later to check if they match the sed command
+    # write the data            
+    write_data(status, csv_f)
+    print "\n ----\n ---- TXT file written for " + status +"\n ----"
+                
