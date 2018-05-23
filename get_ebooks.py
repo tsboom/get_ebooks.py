@@ -5,6 +5,10 @@ from ftplib import FTP
 import socket
 import os
 import zipfile
+import csv
+import re
+
+# use pdb.set_trace() to break debugger
 
 # connect and log in
 print "\n ----\n ---- Connecting...\n ----"
@@ -31,9 +35,62 @@ print "\n ----\n ---- File downloaded: " + filename + "\n ----"
 # unzip the file
 zip = zipfile.ZipFile(filename)
 zip.extractall()
+
+#get name of the extracted filenames and close
+unzipped_files = zip.namelist()
+zip.close()
+
 print "\n ----\n ---- File unzipped\n ----"
 
-# format data 
+# get dataloader files ready for writing
+add_dataloader = open("usmai-active.txt", "w")
+delete_dataloader = open("usmai-inactive.txt", "w")
+
+# transform CSVs into dataloader filenames
+for i, file in enumerate(unzipped_files):
+    f = open(unzipped_files[i])
+    # read CSV
+    csv_f = csv.reader(f)
+    # skip first line
+    next(csv_f, None)
+            
+    # get data out of rows
+    # get only numbers from the eisbn field
+    def get_eisbn(row):
+        return re.sub("\D", "", row[3]) 
+    # get bkey
+    def get_bkey(row):
+        return row[0]
+
+    if unzipped_files[i].endswith("Add.csv"):
+        for row in csv_f:
+            eisbn = get_eisbn(row)
+            bkey = get_bkey(row)
+            add_dataloader.write(eisbn + "\tbkey=" + bkey +"\tACTIVE\n")
+    elif unzipped_files[i].endswith("Delete.csv"):
+        for row in csv_f:
+            eisbn = get_eisbn(row)
+            bkey = get_bkey(row)
+            delete_dataloader.write(eisbn + "\tbkey=" + bkey +"\tINACTIVE\n")
+    else:
+        print "There is no Add.csv or Delete.csv. Could not generate txt file"
+            
+
+            
+            
+            
+    
+            
+        
+        
+        
+        
+        
+    
+    
+    
+    
+
 
 
 # diff the files later to check if they match the sed command
