@@ -61,7 +61,22 @@ for i, file in enumerate(unzipped_files):
     # get bkey
     def get_bkey(row):
         return row[0]
-
+    
+    # check to see if the file is to Add or Delete and give it an ACTIVE or INACTIVE status  
+    def get_status(unzipped_file):
+        if unzipped_files[i].endswith("Add.csv"):
+            return status = "ACTIVE"
+        elif unzipped_files[i].endswith("Delete.csv"):
+            return status = "INACTIVE"
+        else
+            print "There is no Add.csv or Delete.csv. Could not generate txt file."
+    
+    # set the status INACTIVE or ACTIVE
+    get_status(unzipped_files)
+    
+    
+    # write to dataloader based on get_status
+    def write_data(status):
     if unzipped_files[i].endswith("Add.csv"):
         for row in csv_f:
             eisbn = get_eisbn(row)
@@ -72,8 +87,7 @@ for i, file in enumerate(unzipped_files):
             eisbn = get_eisbn(row)
             bkey = get_bkey(row)
             delete_dataloader.write(eisbn + "\tbkey=" + bkey +"\tINACTIVE\n")
-    else:
-        print "There is no Add.csv or Delete.csv. Could not generate txt file"
+
             
 
             
