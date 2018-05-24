@@ -8,6 +8,13 @@ This repository includes a non-working example in `ftp_info_example.py`
 
 
 
+### To run the script
+
+1. rename `ftp_info_example.py` to `ftp_info.py` and add the login credentials. 
+2. `python get_ebooks.py`
+
+
+
 The script downloads a zip file, and unzips it into two CSVs. One csv lists the ebooks to delete from SFX, and the other one lists the ebooks to add to SFX. 
 
 The data will be changed from CSV format like so:
